@@ -1,0 +1,19 @@
+// Import Bootstrap variables first
+@import "../node_modules/bootstrap/scss/variables";
+
+// Custom variables (override Bootstrap variables if needed)
+// $primary: #ff6347;
+
+// Import other Bootstrap SCSS components as needed
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/forms";
+// Import other parts of Bootstrap as needed
+
+// Your custom styles
+body {
+    font-family: 'Arial', sans-serif;
+}
