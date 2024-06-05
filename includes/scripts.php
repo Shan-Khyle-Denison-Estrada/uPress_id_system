@@ -1,1 +1,1 @@
-<script src="../../vendor/js/bootstrap.bundle.min.js"></script>
+<script src="../../node_modules/bootstrap/js/bootstrap.bundle.min.js"></script>
