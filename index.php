@@ -6,6 +6,10 @@
     require_once('./includes/shared/head_index.php');
 ?>
 <body>
+    <?php
+        require_once('./includes/shared/navbar_index.php');
+    ?>
+        
     <p>asdadas</p>
 
     <?php

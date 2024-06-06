@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "watch:scss": "node-sass -w styles/stylepower.scss styles/style.css"
+    "compile:scss": "node-sass sass/main.scss css/style.css -w"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
     "node-sass": "^9.0.0"
   }
 }
