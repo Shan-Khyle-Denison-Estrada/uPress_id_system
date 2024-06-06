@@ -1,5 +1,7 @@
-
-<!DOCTYPE html>
+<?php
+    include_once('pages/shared/routes.php');
+?>  
+<!-- <!DOCTYPE html>
 <html lang="en">
 <?php
     $page_title = "Crimson";
@@ -16,4 +18,4 @@
         require_once('./includes/scripts.php');
     ?>
 </body>
-</html>
+</html> -->
