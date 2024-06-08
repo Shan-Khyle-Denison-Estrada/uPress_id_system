@@ -5,8 +5,7 @@ $segments = explode('/', $requestUrl);
 array_shift($segments);
 @session_start();
 $page_title = "Crimson";
-include_once("pages/shared/head_index.php");
-include_once("pages/shared/navbar_index.php");
+include_once("view/shared/header.php");
 
 if (isset($segments[""])) {
     
