@@ -3,7 +3,8 @@
     "compile:scss": "node-sass sass/main.scss css/style.css -w"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
   },
   "devDependencies": {
     "node-sass": "^9.0.0"

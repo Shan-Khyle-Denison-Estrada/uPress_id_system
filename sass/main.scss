@@ -223,7 +223,7 @@ body {
   border-color: beige !important;
 } 
 // navbar end
-
+// body & bg
 .body-bg{
   background-image: url("../assets/bg/hero-page-bg.svg");
   height: calc(100vh - 67px);  
@@ -235,6 +235,57 @@ body {
   align-items: center;
 }
 
+.upress-text-area{
+  background: #990000;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 400;
+}
+.upress-text-area p{
+  margin: 0;
+}
+
+// .id-layout img
+// body & bg end
+// footer content & background
+footer {
+  background: linear-gradient(to right, #4F1212,#c9000c);
+  margin: 0;
+  padding: 45px 0;
+}
+.single-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.single-box p#text-content {
+  color: #BF0000;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+}
+.single-box p#contact-content{
+  color: #fff;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.single-box h3{
+  color: #fff;
+  font-weight: 700;
+}
+.single-box ul{
+  padding: 0;
+}
+.single-box li {
+  text-align: center;
+}
+.single-box ul li a{
+  color: #fff;
+  line-height: 1.8;
+  font-weight: 700;
+  text-decoration: none;
+}
+// footer end 
 
 // media queries
 @media (max-width: 576px) {
@@ -256,6 +307,9 @@ body {
     font-size: 1.15em !important;
     padding-inline: 0.6rem !important;
   }
+  .body-bg .body-content {
+    padding-left: .8rem !important;
+  }
 }
 @media (min-width: 577px) and (max-width: 768px){
   .navbar-brand {
@@ -268,9 +322,10 @@ body {
   }
 }
 @media (min-width: 993px) {
-  footer {
-    height: 46rem;
-  }
+  // footer {
+    
+  // }
+
 }
 
 
