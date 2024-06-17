@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "compile:scss": "node-sass sass/main.scss css/style.css -w"
+    "compile:main": "node-sass sass/main.scss css/style.css -w"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",

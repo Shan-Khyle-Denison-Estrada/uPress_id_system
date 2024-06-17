@@ -188,6 +188,16 @@ $utilities-bg-subtle: (
 
 // Your custom styles
 // body
+*{
+  margin: 0;
+  padding: 0;
+}
+*,::before,::after{
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Arial', sans-serif;
   padding-top: 66px;
@@ -285,7 +295,194 @@ footer {
   font-weight: 700;
   text-decoration: none;
 }
-// footer end 
+// footer end asdad
+
+// nav pills form type
+.form-container .nav-box {
+  background-color: #570000;
+  max-width: fit-content;
+  border-radius: 28px;
+  color: #fff;
+  padding: .25rem;
+}
+.form-container .nav .nav-link {
+  color: #fff;
+  border-radius: 30px;
+  width: 100px;
+  text-align: center;
+  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-y: .25em;
+}
+.form-container .nav .nav-link:hover {
+  background-color: #BF0000;
+  transition: background-color .5s, border-color .5s ease-in-out;
+}
+.form-container .nav .active {
+  background-color: #990000 !important;
+}
+
+
+// stepper
+a{
+  text-decoration: none;
+  /* color: inherit; */
+}
+ul{
+  list-style: none;
+}
+p.lead#upressFR,p.lead#effectDate{
+  font-size: 14px;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+.form-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-box .form-progress{
+  position: relative;
+  padding: 0 .5em;
+  min-width: 250px;
+}
+.form-progress ul.progress-steps {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  position: sticky; 
+  top: 170px; 
+  z-index: 99;
+}
+
+.form-progress ul.progress-steps li{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2em;
+}
+.form-progress ul.progress-steps li p {
+  margin: 0;
+}
+.form-progress ul.progress-steps li > span {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+  border-radius: 50%;
+  background-color: $gray-300;
+  z-index: 1;
+}
+.form-progress ul.progress-steps li.active > span {
+  color: #fff;
+  background-color: #c9000c;
+  z-index: 1;
+}
+.form-progress ul.progress-steps li p span {
+  font-size: 14px;
+  color: $gray-600;
+  display: none;
+}
+
+.form-progress ul li p {
+  position: absolute;
+  top: -2em;
+  font-size: 12px;
+}
+
+// form
+.form-box form {
+  width: 100%;
+  padding-inline: .2em;
+  background-color: #fff;
+}
+
+form > div {
+  max-width: 450px;
+  margin: 0 auto;
+}
+form > div p {
+  color: $gray-700;
+  margin-bottom: .8em;
+}
+form > div > div:not(.checkbox) {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .8em;
+}
+input[type=radio] {
+  font-size: 18px;
+}
+form :where(input:not(.form-check-input), select) {
+  height: 40px;
+  padding: 0 1em;
+  border-radius: 7px;
+  border: 1px solid $gray-300;
+  outline-color: $gray-600;
+  background-color: transparent;
+}
+form label {
+  font-size: 15px;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+}
+form .grouping {
+  display: flex;
+}
+form .grouping input {
+  max-width: 70px;
+  text-align: center;
+  margin-right: 1em;
+}
+form .checkbox input {
+  height: auto;
+}
+// next form
+form > div:not(.group-btn) {
+  display: none;
+  // -webkit-animation: fadeIn .6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  // animation: fadeIn .6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+form > div.active {
+  display: block;
+}
+
+// buttons
+.group-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-block: 2em;
+}
+.group-btn [class*="btn-"] {
+  background-color: #c9000c;
+  color: #fff;
+  padding: .6em 1.5em;
+  border: 4px solid #BF0000;
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-transition: background-color .3s, border-color .3s ease-out;
+  transition: background-color .3s, border-color .3s ease-out;
+}
+.group-btn [class*="btn-"]:disabled {
+  background-color: $gray-500;
+  border-color: $gray-300;
+  cursor: not-allowed;
+}
+.group-btn [class*="btn-"]:hover:not(:disabled)  {
+  background-color: #990000;
+  border-color: #c9000c;
+} 
+::placeholder {
+  color: $gray-500;
+}
+
+// stepper end
 
 // media queries
 @media (max-width: 576px) {
@@ -311,22 +508,89 @@ footer {
     padding-left: .8rem !important;
   }
 }
+
 @media (min-width: 577px) and (max-width: 768px){
   .navbar-brand {
     font-size: 1.15rem !important;
+  }
+  .form-progress ul.progress-steps {
+    // flex-direction: column;
+    padding-top: 1em;
+    padding-left: 0;
+    gap: 2em;
   }
 }
 @media (min-width: 769px) and (max-width: 992px){
   .navbar-brand {
     font-size: 1.2rem !important;
   }
+  .form-box {
+    flex-direction: row;
+  }
+  // form progress
+  .form-progress ul.progress-steps {
+    flex-direction: column;
+    gap: 0;
+  }
+  .form-progress ul.progress-steps li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 30px;
+    width: 2px;
+    height: 65px;
+    background-color: #dee2e6;
+  }
+  // form
+  .form-box form {
+    padding-inline: 1em;
+  }
+  .form-progress ul li p {
+    position: relative;
+    top: auto;
+    font-size: inherit;
+   }
+   .form-progress ul.progress-steps li p span {
+     display: block;
+   }
 }
+
 @media (min-width: 993px) {
-  // footer {
-    
-  // }
+  .navbar-brand {
+    font-size: 1.22rem !important;
+  }
+  .form-box {
+    flex-direction: row;
+  }
+  // form progress
+  .form-progress ul.progress-steps {
+    flex-direction: column;
+    gap: 0;
+  }  
+  .form-progress ul.progress-steps li:not(:last-child)::before {
+    content: ''; 
+    position: absolute;
+    left: 20px;
+    top: 30px;
+    width: 2px;
+    height: 65px;
+    background-color: $gray-300;
+  }
+  // form
+  .form-box form {
+    width: 100%;
+    padding-inline: 1em;
+    background-color: #fff;
+  }
 
+  .form-progress ul li p {
+   position: relative;
+   top: auto;
+   font-size: inherit;
+  }
+  .form-progress ul.progress-steps li p span {
+    display: block;
+  }
+  
 }
-
-
-// end
+// media end
