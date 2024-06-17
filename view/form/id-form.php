@@ -3,12 +3,12 @@
     <div class="nav-box container-fluid mb-2">
         <ul class="nav nav-pills justify-content-center align-item-center" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="student-tab" data-bs-toggle="pill" 
+                <button class="nav-link active" id="student" data-bs-toggle="pill" 
                     data-bs-target="#pills-student" type="button" role="tab" aria-controls="pills-student" 
                     aria-selected="true">Student</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="employee-tab" data-bs-toggle="pill" 
+                <button class="nav-link" id="employee" data-bs-toggle="pill" 
                 data-bs-target="#pills-employee" type="button" role="tab" aria-controls="pills-employee" 
                 aria-selected="false">Employee</button>
             </li>
@@ -18,7 +18,7 @@
     <div class="tab-content" id="pills-tabContent">
         <!-- student tab -->
         <div class="tab-pane fade show active" id="pills-student"
-            role="tabpanel" aria-labelledby="student-tab" tabindex="0">
+            role="tabpanel" aria-labelledby="student" tabindex="0">
             <div class="row p-0 m-0">
                 <div class="col-lg-7 col-md-12 py-1">
                     <div id="page" class="site">
@@ -88,6 +88,10 @@
                                         <input type="text" placeholder="e.g. Landiao">
                                     </div>
                                     <div>
+                                        <label for="">Name Ext.</label>
+                                        <input type="text" placeholder="e.g. Sr./Jr.">
+                                    </div>
+                                    <div>
                                         <label for="">Program/Strand</label>
                                         <select class="js-example-theme-single" name="programs" id="select-program">
                                             <option value="">Select a program</option>
@@ -107,6 +111,10 @@
                                     <div>
                                         <label for="">Family Name</label>
                                         <input type="text" placeholder="e.g. Landiao">
+                                    </div>
+                                    <div>
+                                        <label for="">Name Ext.</label>
+                                        <input type="text" placeholder="e.g. Sr./Jr.">
                                     </div>
                                     <div>
                                         <label for="">Address</label>
@@ -170,7 +178,7 @@
 
         <!-- employee tab -->
         <div class="tab-pane fade" id="pills-employee" 
-            role="tabpanel" aria-labelledby="employee-tab" tabindex="0">
+            role="tabpanel" aria-labelledby="employee" tabindex="0">
             <div class="row p-0 m-0">
                 <div class="col-lg-7 col-md-12 py-1">
                     <div id="page" class="site">
@@ -240,6 +248,10 @@
                                         <input type="text" placeholder="e.g. Landiao">
                                     </div>
                                     <div>
+                                        <label for="">Name Ext.</label>
+                                        <input type="text" placeholder="e.g. Sr./Jr.">
+                                    </div>
+                                    <div>
                                         <label for="">Academic Rank/Plantilla Position</label>
                                         <input type="text" placeholder="e.g. san juan">
                                     </div>
@@ -265,14 +277,14 @@
                                     </div>
                                     <div>
                                         <label for="">Civil Status</label>
-                                        <select class="js-example-theme-single" name="programs" id="select-program">
-                                            <option value="">Select a program</option>
+                                        <select class="js-example-theme-single" name="civilStatus" id="civilStatus">
+                                            <option value="">Single</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="">Blood Type</label>
-                                        <select class="js-example-theme-single" name="programs" id="select-program">
-                                            <option value="">Select a program</option>
+                                        <select class="js-example-theme-single" name="bloodType" id="bloodType">
+                                            <option value="">A</option>
                                         </select>
                                     </div>
                                 </div>
@@ -289,6 +301,10 @@
                                     <div>
                                         <label for="">Family Name</label>
                                         <input type="text" placeholder="e.g. Landiao">
+                                    </div>
+                                    <div>
+                                        <label for="">Name Ext.</label>
+                                        <input type="text" placeholder="e.g. Sr./Jr.">
                                     </div>
                                     <div>
                                         <label for="">Address</label>

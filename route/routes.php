@@ -6,7 +6,6 @@ array_shift($segments);
 @session_start();
 
 
-
 if(isset($_GET['ses'])){
     if(isset($segments[0])){
         switch($segments[0]){
@@ -19,7 +18,6 @@ if(isset($_GET['ses'])){
             break;
         }
     }
-    
 } else {
     include_once("view/shared/header.php");
     include_once("view/shared/offcanvas-nav.php");

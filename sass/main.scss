@@ -201,8 +201,9 @@ html{
 body {
   font-family: 'Arial', sans-serif;
   padding-top: 66px;
+  height: 100%;
 }
-// body end
+// body end 
 // navbar
 .navbar {
   background-color: #c9000c;
@@ -481,8 +482,8 @@ form > div.active {
 ::placeholder {
   color: $gray-500;
 }
-
 // stepper end
+
 
 // media queries
 @media (max-width: 576px) {

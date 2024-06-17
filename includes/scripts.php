@@ -25,8 +25,8 @@
 <script>
     $(document).ready(function() {
         text(0);
-     });
-     function text(x) {
+    });
+    function text(x) {
         clearViews();
         if (x == 0) {
             // student
@@ -54,14 +54,14 @@
             $('.emp-affidavit').show();
         }
     };
-    $('#new').click(function() {
-        text(0);
-    });
-    $('#rep').click(function() {
-        text(1);
-    });
-    $('#lost').click(function() {
-        text(2);
+        $('#new').click(function() {
+            text(0);
+        });
+        $('#rep').click(function() {
+            text(1);
+        });
+        $('#lost').click(function() {
+            text(2);
     });
 
     function clearViews() {
@@ -73,7 +73,7 @@
         $('.hrmo-lost').hide();
         $('.emp-affidavit').hide();
         
-}
+    }
     
 </script>
 

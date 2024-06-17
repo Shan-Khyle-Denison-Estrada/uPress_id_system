@@ -1,0 +1,250 @@
+// Import Bootstrap SCSS files
+@import "../node_modules/bootstrap/scss/_functions.scss";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";
+
+$theme-colors-rgb: (
+  "primary": to-rgb($primary),
+  "secondary": to-rgb($secondary),
+  "success": to-rgb($success),
+  "info": to-rgb($info),
+  "warning": to-rgb($warning),
+  "danger": to-rgb($danger),
+  "light": to-rgb($light),
+  "dark": to-rgb($dark)
+) !default;
+// Define $theme-colors-text
+$theme-colors-text: (
+  "primary": #007bff,
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+$theme-colors-bg-subtle: (
+  "primary": #007bff, // Example color values
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+$theme-colors-border-subtle: (
+  "primary": #007bff,
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+// Define $theme-colors-text-dark
+$theme-colors-text-dark: (
+  "primary": #007bff, // Example color values
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+// Define $theme-colors-bg-subtle-dark
+$theme-colors-bg-subtle-dark: (
+  "primary": #007bff, // Example color values
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+// Define $theme-colors-border-subtle-dark
+$theme-colors-border-subtle-dark: (
+  "primary": #007bff, // Example color values
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+
+// Define gutter sizes
+$gutters: (
+  "0": 0,
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 1rem,
+  "4": 1.5rem,
+  "5": 3rem
+);
+
+$utilities-border-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+$utilities-border-subtle: (
+  "primary": lighten($primary, 10%),
+  "secondary": lighten($secondary, 10%),
+  "success": lighten($success, 10%),
+  "info": lighten($info, 10%),
+  "warning": lighten($warning, 10%),
+  "danger": lighten($danger, 10%),
+  "light": lighten($light, 10%),
+  "dark": lighten($dark, 10%)
+);
+
+$negative-spacers: (
+  "-1": -0.25rem,
+  "-2": -0.5rem,
+  "-3": -1rem,
+  "-4": -1.5rem,
+  "-5": -3rem
+);
+
+$utilities-text-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+$utilities-text-emphasis-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+$utilities-links-underline: (
+  "always": underline,
+  "hover": hover-underline,
+  "none": none
+);
+
+$utilities-bg-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+$utilities-bg-subtle: (
+  "primary": lighten($primary, 10%),
+  "secondary": lighten($secondary, 10%),
+  "success": lighten($success, 10%),
+  "info": lighten($info, 10%),
+  "warning": lighten($warning, 10%),
+  "danger": lighten($danger, 10%),
+  "light": lighten($light, 10%),
+  "dark": lighten($dark, 10%)
+);
+
+// Include remainder of required parts
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+
+// Import other Bootstrap components as needed
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/helpers";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/forms";
+// include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "../node_modules/bootstrap/scss/utilities/api";
+// Import other parts of Bootstrap as needed
+
+// Your custom styles
+// body
+*{
+  margin: 0;
+  padding: 0;
+}
+*,::before,::after{
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+}
+// body end
+/* admin login */
+.login-body {
+    height: calc(100vh - 0px); 
+    background: linear-gradient(to right, #4F1212,#c9000c) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-text {
+    color: #fff;
+}
+form > div {
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+input.form-control {
+    border: 1px solid $gray-300 !important;
+    outline-color: $gray-600 !important;
+    border-radius: 6px !important;
+    max-width: 500px !important;
+    // font-size: 1.5rem;
+}
+/* admin login end */
+
+
+// media queries
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (min-width: 1199.98px) { 
+
+}
+// media queries end
+
