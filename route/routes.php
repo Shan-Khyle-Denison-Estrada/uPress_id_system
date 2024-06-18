@@ -14,7 +14,7 @@ if(isset($_GET['ses'])){
             break;
             
             default:
-            include_once("view/login/login.php");
+            include_once("view/login/index.php");
             break;
         }
     }
@@ -32,9 +32,7 @@ if(isset($_GET['ses'])){
             case "get-id-now":
                 require_once("view/form/id-form.php");
             break;
-            // case "adminlogin":
-            //     require_once("view/login/login.php");
-            // break;
+
             default:
                 include_once("view/shared/body-content.php");
             break;

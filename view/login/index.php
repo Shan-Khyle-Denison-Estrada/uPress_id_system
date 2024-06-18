@@ -1,9 +1,15 @@
+<?php
+include_once('connection/PDOModel.php');
+$pdo = new PDOModel();
+
+$title = "UPress Login";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title ?></title>
+    <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="../../css/login.css">
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
@@ -28,7 +34,7 @@
                                 <input type="text" class="form-control bg-light" id="floatingInput" placeholder="Username">
                                 <label for="floatingInput">Username</label>
                             </div>
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-5">
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>

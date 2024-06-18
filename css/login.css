@@ -6668,4 +6668,10 @@ input.form-control {
   border-radius: 6px !important;
   max-width: 500px !important; }
 
+.input-group .btn {
+  background-color: #fff;
+  color: #c9000c;
+  font-size: 2rem;
+  font-weight: 700; }
+
 /* admin login end */
