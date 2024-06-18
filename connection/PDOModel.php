@@ -7,17 +7,19 @@ class PDOModel {
 
     function __construct() {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=id_system;charset=utf8', 'root', '');
+            $this->db = new PDO('mysql:host=localhost;dbname=idsystem;charset=utf8', 'root', '');
+            // Enable PDO exceptions for error handling
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            var_dump($this->db);
+            //var_dump("Database connection established.");
         } catch (PDOException $e) {
-            echo "<h1>Error establishing a database connection</h1>";
-            // Optionally log the error message for debugging purposes
-            error_log($e->getMessage());
+            echo "<h1>Error establishing a database connection: " . $e->getMessage() . "</h1>";
             die();
         }
-        var_dump("test");
+    }
+
+    // Function to return the PDO instance
+    public function getDb() {
+        return $this->db;
     }
 }
-var_dump("test 2");
 ?>
