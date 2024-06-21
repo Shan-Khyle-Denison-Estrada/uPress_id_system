@@ -26,6 +26,12 @@ class loginModel {
         if( $userExist == 1) {
             $_SESSION['isLogin'] = 1;
             $_SESSION["role"] = $userRow['role'];
+        } else {
+            echo '<script language="javascript">';  
+            echo 'alert("USER UNKNOWN")';
+            echo '</script>';
+            // header("location: /admin");
+            // return;
         }
         
         return $userExist;

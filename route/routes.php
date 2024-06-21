@@ -8,17 +8,33 @@ array_shift($segments);
 
 
 if(isset($_SESSION["isLogin"]) == 1){
-    if($_SESSION["role"] == "admin"){
-        echo "test admin";
-    } else {
+    if($_SESSION["role"] == "super_admin"){
+        $title = "Super Admin";
         if(isset($segments[0])){
             switch($segments[0]){
-                case "admin":
-                    echo'adsas';
+                case "dashboard":
+                    require_once("view/admin/dashboard.php");
                 break;
                 case "logout":
                     session_destroy();
-                    header("location:/admin");
+                    header("location: /admin");
+                    break;
+                default:
+                include_once("view/login/index.php");
+                break;
+            }
+        }
+    } else {
+        $title = "Admin";
+        if(isset($segments[0])){
+            switch($segments[0]){   
+                case "dashboard":
+                    include_once("view/admin/dashboard.php");
+                    include_once("view/admin/dashboard-nav.php");
+                break;
+                case "logout":
+                    session_destroy();
+                    header("location: /admin");
                     break;
                 default:
                 include_once("view/login/index.php");
@@ -26,6 +42,23 @@ if(isset($_SESSION["isLogin"]) == 1){
             }
         }
     }
+    // else if($_SESSION["role"] == "admin"){
+        // $title = "Admin";
+        // if(isset($segments[0])){
+        //     switch($segments[0]){   
+        //         case "dashboard":
+        //             require_once("view/admin/dashboard.php");
+        //         break;
+        //         case "logout":
+        //             session_destroy();
+        //             header("location: /admin");
+        //             break;
+        //         default:
+        //         include_once("view/login/index.php");
+        //         break;
+        //     }
+        // }
+    // }
 } else {
     
     if(isset($segments[0])){
@@ -35,7 +68,7 @@ if(isset($_SESSION["isLogin"]) == 1){
         }
         switch($segments[0]){
             case "about-us":
-                require_once("view/background/about-us.php");
+                require_once("view/about/about-us.php");
             break;
             case "tutorial":
                 require_once("view/guide/tutorial.php");
