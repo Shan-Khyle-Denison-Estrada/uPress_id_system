@@ -2,23 +2,20 @@
 <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../node_modules/select2/dist/js/select2.min.js"></script>
+<script src="../../node_modules/datatables.net/js/dataTables.min.js"></script>
+<script src="../../node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script src="./includes/stepper.js"></script>
+<script src="./includes/sidebar-toggle.js"></script>
 
 <script>
-    $(document).ready(function() {
-        var $disabledResults = $(".js-example-theme-single");
-
-        var category= [
-            "Master of Public Administration (MPA)", "Master of Arts in Education (MAED)", "Master of Arts in Science Education (MA SciEd)"
-
-        ];
-        
-        $('.js-example-theme-single').select2({
-            theme: "classic"
+    $(document).ready(function () {
+        $('#user').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ]
         });
-        // $('#select-program').select2({
-        //     data:category
-        // });
     });
 </script>
 
@@ -77,5 +74,5 @@
     }
     
 </script>
-
+<!-- stepper script end -->
 

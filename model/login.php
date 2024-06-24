@@ -24,14 +24,22 @@ class loginModel {
         $userExist = $stmt->rowCount();
         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
         if( $userExist == 1) {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             $_SESSION['isLogin'] = 1;
             $_SESSION["role"] = $userRow['role'];
+            $_SESSION["firstName"] = $userRow["firstName"];
+            $_SESSION["lastName"] = $userRow["lastName"];
+            
         } else {
-            echo '<script language="javascript">';  
-            echo 'alert("USER UNKNOWN")';
-            echo '</script>';
-            // header("location: /admin");
-            // return;
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['error'] = "USER UNKNOWN";
+
+            header("location: /admin");
+            exit();
         }
         
         return $userExist;

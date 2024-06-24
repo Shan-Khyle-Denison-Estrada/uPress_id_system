@@ -9,58 +9,135 @@ array_shift($segments);
 
 if(isset($_SESSION["isLogin"]) == 1){
     if($_SESSION["role"] == "super_admin"){
-        $title = "Super Admin";
+        $acctype = "Super Admin";
+        switch($segments[0]){
+            case "dashboard":
+                $title = "Dashboard";
+                break;
+            case "transaction":
+                $title = "Transactions";
+                break;
+            case "student-layout":
+                $title = "Student ID";
+                break;
+            case "employee-layout":
+                $title = "Employee ID";
+                break;
+            case "manage-accounts";
+                $title = "Account Management";
+                break;
+            case "my-profile";
+                $title = "Profile";
+                break;
+            case "settings";
+                $title = "Settings";
+            break;
+        }
         if(isset($segments[0])){
+            include_once("view/admin/dash-header.php");
+            include_once("view/admin/dash-sidenav-bar.php");
             switch($segments[0]){
                 case "dashboard":
                     require_once("view/admin/dashboard.php");
+                    break;
+                case "transaction":
+                    require_once("view/admin/transactions.php");
+                    break;
+                case "student-layout":
+                    require_once("view/admin/student.php");
+                    break;
+                case "employee-layout":
+                    require_once("view/admin/employee.php");
+                    break;
+                case "manage-accounts";
+                    require_once("view/admin/manage-account.php");
+                    break;
+                case "my-profile";
+                    require_once("view/admin/page-profile.php");
+                    break;
+                case "settings";
+                require_once("view/admin/page-setting.php");
                 break;
+                case "admin":
+                    include_once("view/login/index.php");
+                    break; 
                 case "logout":
                     session_destroy();
-                    header("location: /admin");
+                    echo "<script>location.href = 'admin';</script>";
                     break;
                 default:
-                include_once("view/login/index.php");
-                break;
+                    echo "<script>location.href = 'admin';</script>";
+                    break;
             }
+            include_once("view/admin/dash-footer.php");
         }
     } else {
-        $title = "Admin";
         if(isset($segments[0])){
-            switch($segments[0]){   
+            $acctype = "Admin";
+            switch($segments[0]){
                 case "dashboard":
-                    include_once("view/admin/dashboard.php");
-                    include_once("view/admin/dashboard-nav.php");
-                break;
-                case "logout":
-                    session_destroy();
-                    header("location: /admin");
+                    $title = "Dashboard";
                     break;
-                default:
-                include_once("view/login/index.php");
+                case "transaction":
+                    $title = "Transactions";
+                    break;
+                case "student-layout":
+                    $title = "Student ID";
+                    break;
+                case "employee-layout":
+                    $title = "Employee ID";
+                    break;
+                case "manage-accounts";
+                    $title = "Account Management";
+                    break;
+                case "my-profile";
+                    $title = "Profile";
+                    break;
+                case "settings";
+                    $title = "Settings";
                 break;
+            }
+            if(isset($segments[0])){
+                include_once("view/admin/dash-header.php");
+                include_once("view/admin/dash-sidenav-bar.php");
+                switch($segments[0]){
+                    case "dashboard":
+                        require_once("view/admin/dashboard.php");
+                        break;
+                    case "transaction":
+                        require_once("view/admin/transactions.php");
+                        break;
+                    case "student-layout":
+                        require_once("view/admin/student.php");
+                        break;
+                    case "employee-layout":
+                        require_once("view/admin/employee.php");
+                        break;
+                    case "manage-accounts";
+                        require_once("view/admin/manage-account.php");
+                        break;
+                    case "my-profile";
+                        require_once("view/admin/page-profile.php");
+                        break;
+                    case "settings";
+                    require_once("view/admin/page-setting.php");
+                    break;
+                    case "admin":
+                        include_once("view/login/index.php");
+                        break; 
+                    case "logout":
+                        session_destroy();
+                        echo "<script>location.href = 'admin';</script>";
+                        break;
+                    default:
+                        echo "<script>location.href = 'admin';</script>";
+                        break;
+                }
+                include_once("view/admin/dash-footer.php");
             }
         }
     }
-    // else if($_SESSION["role"] == "admin"){
-        // $title = "Admin";
-        // if(isset($segments[0])){
-        //     switch($segments[0]){   
-        //         case "dashboard":
-        //             require_once("view/admin/dashboard.php");
-        //         break;
-        //         case "logout":
-        //             session_destroy();
-        //             header("location: /admin");
-        //             break;
-        //         default:
-        //         include_once("view/login/index.php");
-        //         break;
-        //     }
-        // }
-    // }
 } else {
-    
     if(isset($segments[0])){
         if($segments[0] !="admin"){
             include_once("view/shared/header.php");

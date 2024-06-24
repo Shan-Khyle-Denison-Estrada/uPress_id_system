@@ -363,3 +363,21 @@
         </div>
     </div>    
 </div>
+
+<script>
+    $(document).ready(function() {
+        var $disabledResults = $(".js-example-theme-single");
+
+        var category= [
+            "Master of Public Administration (MPA)", "Master of Arts in Education (MAED)", "Master of Arts in Science Education (MA SciEd)"
+
+        ];
+        
+        $('.js-example-theme-single').select2({
+            theme: "classic"
+        });
+        // $('#select-program').select2({
+        //     data:category
+        // });
+    });
+</script>
