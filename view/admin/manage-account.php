@@ -117,7 +117,7 @@
                     </div>
                 </div>
             </main>
-
+            <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
             <!-- Add Modal -->
             <div class="modal fade" id="addAccountModal" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -229,7 +229,6 @@
                                         accept="image/*">
                                 </div>
                                 <input type="hidden" name="type" value="save">
-                                >>>>>>> Stashed changes
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -239,7 +238,6 @@
                     </div>
                 </div>
             </div>
-            <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
             <script>
 $(document).ready(function() {
     $('#addAccountModal .js-example-basic-single').select2({
