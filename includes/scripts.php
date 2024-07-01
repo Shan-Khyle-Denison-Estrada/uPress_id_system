@@ -2,11 +2,22 @@
 <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../node_modules/select2/dist/js/select2.min.js"></script>
-<script src="../../node_modules/datatables.net/js/dataTables.min.js"></script>
-<script src="../../node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+
+<script src="../../node_modules/jszip/dist/jszip.js"></script>
+<script src="../../node_modules/pdfmake/build/pdfmake.js"></script>
+<script src="../../node_modules/pdfmake/build/vfs_fonts.js"></script>
+<script src="../../node_modules/datatables.net/js/dataTables.js"></script>
+<script src="../../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.js"></script>
+<script src="../../node_modules/datatables.net-buttons/js/dataTables.buttons.js"></script>
+<script src="../../node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.js"></script>
 <script src="../../node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="../../node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="../../node_modules/datatables.net-responsive/js/dataTables.responsive.js"></script>
+<script src="../../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js"></script>
+
 <script src="./includes/stepper.js"></script>
 <script src="./includes/sidebar-toggle.js"></script>
+
 
 <!-- stepper script -->
 <script>
