@@ -74,4 +74,3 @@ function clearViews() {
 
 }
 </script>
-<!-- stepper script end -->
