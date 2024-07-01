@@ -118,8 +118,6 @@
                 </div>
             </main>
 
-            <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-
             <!-- Add Modal -->
             <div class="modal fade" id="addAccountModal" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -241,7 +239,7 @@
                     </div>
                 </div>
             </div>
-
+            <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
             <script>
 $(document).ready(function() {
     $('#addAccountModal .js-example-basic-single').select2({
