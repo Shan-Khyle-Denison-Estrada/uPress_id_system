@@ -26,6 +26,17 @@ if(isset($_SESSION["isLogin"]) == 1){
             case "manage-accounts";
                 $title = "Account Management";
                 break;
+<<<<<<< Updated upstream
+=======
+            case "add-account";
+                require_once("controller/accountControllerTest.php");
+                break;
+            case "edit-account";
+                require_once("controller/accountControllerTest.php");
+                break;
+            case "del-account";
+                require_once("controller/accountControllerTest.php");
+>>>>>>> Stashed changes
             case "my-profile";
                 $title = "Profile";
                 break;
