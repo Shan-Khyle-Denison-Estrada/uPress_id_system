@@ -40,7 +40,7 @@
                                                 foreach ($getAcc as $item) {
                                          ?>
                                         <tr>
-                                            <td id="accID" style="width: 40px;"><?= $item['id'] ?></td>
+                                            <td class="accID" style="width: 40px;"><?= $item['id'] ?></td>
                                             <td style="max-width: 70px; overflow: hidden; text-overflow: ellipsis;"
                                                 title="<?= $item['username'] ?>">
                                                 <?= strlen($item['username']) > 10 ? substr($item['username'], 0, 10) . '...' : $item['username'] ?>
@@ -128,35 +128,36 @@
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Account</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="" id="addStudent">
+                        <form method="post" action="" id="addAccount">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Username</label>
-                                    <input type="text" name="uname" class="form-control" placeholder="e.g. admin?">
+                                    <input type="text" name="uname" class="form-control" placeholder="admin" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Password</label>
-                                    <input type="password" name="pw" class="form-control" placeholder="********">
+                                    <input type="password" name="pw" class="form-control" placeholder="********"
+                                        required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">First name</label>
-                                    <input type="text" name="fname" class="form-control" placeholder="e.g. Sanicare">
+                                    <input type="text" name="fname" class="form-control" placeholder="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Middle name</label>
-                                    <input type="text" name="mname" class="form-control" placeholder="e.g. Plastic">
+                                    <input type="text" name="mname" class="form-control" placeholder="">
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Last name</label>
-                                    <input type="text" name="lname" class="form-control" placeholder="e.g. Stem">
+                                    <input type="text" name="lname" class="form-control" placeholder="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Name Ext.</label>
-                                    <input type="text" name="nameExt" class="form-control" placeholder="e.g. Sr./Jr.">
+                                    <input type="text" name="nameExt" class="form-control" placeholder="Sr / Jr">
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Role</label>
-                                    <select class="form-control js-example-basic-single" name="role" id="role"
+                                    <select class="form-control js-example-basic-single" name="role" id="role" required
                                         style="width: 100%;">
                                         <option value="">Select Role</option>
                                         <option value="admin">Admin</option>
@@ -165,13 +166,14 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Insert your photo</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" name="accountPhoto[]" id="accountPhoto"
+                                        accept="image/*">
                                 </div>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="save" class="btn btn-primary">Save Account</button>
+                                <button type="submit" name="add" class="btn btn-primary">Add account</button>
                             </div>
                         </form>
                     </div>
@@ -238,13 +240,13 @@
                     </div>
                 </div>
             </div>
+
             <script>
 $(document).ready(function() {
     $('#addAccountModal .js-example-basic-single').select2({
         placeholder: 'Select An Option',
         dropdownParent: $('#addAccountModal')
     });
-
     // Initialize Select2 for Edit Account Modal
     $('#editAccountModal .js-example-basic-single').select2({
         placeholder: 'Select An Option',
@@ -260,7 +262,10 @@ $(document).ready(function() {
             }
         }
     });
-
+});
+            </script>
+            <script>
+$(document).ready(function() {
     $('#addAccount').on('submit', function(e) {
         e.preventDefault();
         var formData = new FormData(this);
@@ -273,7 +278,8 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
+                alert('Account Created Successfully');
                 $("#uname").val("");
                 $("#pw").val("");
                 $("#fname").val("");
@@ -314,40 +320,28 @@ $(document).ready(function() {
     //         }
     //     });
     // });
-    $('.edit-btn').click(function(e) {
+    $(document).on('click', '.edit-btn', function(e) {
         e.preventDefault();
-        var id = $(this).closest('tr').find('#accID').text();
-        console.log(id);
+        var selectedID = $(this).closest('tr').find('.accID').text();
+        console.log(selectedID);
 
-        // $.ajax {}
+        var formData = new FormData();
+        formData.append("type", "save");
+        formData.append('accId', selectedID);
+
+        $.ajax({
+            type: 'POST',
+            url: '/edit-account',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response);
+            }
+        });
     });
-    // $('.edit-btn').click(function() {
-    //     // Fetch data attributes from the clicked edit button
-    //     var id = $(this).data('id');
-    //     var username = $(this).data('username');
-    //     var password = $(this).data('password');
-    //     var firstname = $(this).data('firstname');
-    //     var middlename = $(this).data('middlename');
-    //     var lastname = $(this).data('lastname');
-    //     var nameext = $(this).data('nameext');
-    //     var role = $(this).data('role');
-    //     var accountphoto = $(this).data('accountphoto');
 
-    //     var currentPhoto = "uploads/account/" + accountPhoto;
-    //     $('#currentPhoto').attr('src', currentPhoto);
-    //     // Populate the edit modal fields with fetched data
-    //     $('#id').val(id);
-    //     $('#edit_uname').val(username);
-    //     $('#edit_pw').val(password);
-    //     $('#edit_fname').val(firstname);
-    //     $('#edit_mname').val(middlename);
-    //     $('#edit_lname').val(lastname);
-    //     $('#edit_nameExt').val(nameext);
-    //     $('#edit_role').val(role).trigger('change'); // Trigger change to update Select2
-    //     // You might need to handle the account photo display separately
-    // });
-
-    $('.delete-btn').click(function(e) {
+    $(document).on('click', '.delete-btn', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
 
@@ -383,6 +377,5 @@ $(document).ready(function() {
             });
         }
     });
-
 });
             </script>

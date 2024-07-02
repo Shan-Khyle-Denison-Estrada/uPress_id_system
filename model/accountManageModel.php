@@ -8,15 +8,16 @@ class AccountManageModel{
         $db = $conn->getDb();
         // var_dump("test");
 
-        try {
-            $stmt = $db->prepare("`
+        try {   
+            $hashed_pw = password_hash($pw, PASSWORD_DEFAULT);
+            $stmt = $db->prepare("
                 INSERT INTO
                 account (username, password, firstName, middleName, lastName, nameExt, role, accountPhoto)
                 VALUES  (:uname, :pw, :fname, :mname, :lname, :nameExt, :role, :accountPhoto)
             ");
             // bind the parameters
             $stmt->bindParam(':uname', $uname);
-            $stmt->bindParam(':pw', $pw);
+            $stmt->bindParam(':pw', $hashed_pw);
             $stmt->bindParam(':fname', $fname);
             $stmt->bindParam(':mname', $mname);
             $stmt->bindParam(':lname', $lname);
@@ -30,7 +31,7 @@ class AccountManageModel{
             var_dump($uname);
             // Optionally, you can return the ID of the inserted row
             // variable res as lastinsertid
-            echo $db->lastInsertId();
+            return $db->lastInsertId();
 
         } catch (PDOException $e) {
             // Handle any errors
@@ -43,7 +44,10 @@ class AccountManageModel{
         $db = $conn->getDb();
 
         $res = $db->prepare("SELECT * FROM account WHERE deletedAt IS NULL AND status = '0' ORDER BY `role` DESC");
+        // $res->bindParam(':id', $id, PDO::PARAM_INT);
         $res->execute();
+
+        $fetch_acc = [];
         while($row = $res->fetch(PDO::FETCH_ASSOC)) {
             $fetch_acc[$row['id']]=$row;
         }
@@ -54,6 +58,7 @@ class AccountManageModel{
         $db = $conn->getDb();
         
         try {
+            $hashed_pw = password_hash($pw, PASSWORD_DEFAULT);
             $stmt = $db->prepare("
                 UPDATE account 
                 SET username = :uname, password = :pw, firstName = :fname, middleName = :mname, lastName = :lname, 
@@ -63,7 +68,7 @@ class AccountManageModel{
             // bind the parameters
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(':uname', $uname);
-            $stmt->bindParam(':pw', $pw);
+            $stmt->bindParam(':pw', $hashed_pw);
             $stmt->bindParam(':fname', $fname);
             $stmt->bindParam(':mname', $mname);
             $stmt->bindParam(':lname', $lname);

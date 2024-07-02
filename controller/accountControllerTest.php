@@ -17,6 +17,7 @@ if (isset($_POST["type"])) {
 }
 
 function handleAddAccount($accountModel) {
+    var_dump('est');
     $uname = htmlentities($_POST["uname"]);
     $pw = htmlentities($_POST["pw"]);
     $fname = htmlentities($_POST["fname"]);
@@ -38,20 +39,39 @@ function handleAddAccount($accountModel) {
 }
 
 function handleSaveAccount($accountModel) {
-    $id = $_POST['id'];
-    $uname = htmlentities($_POST["uname"]);
-    $pw = htmlentities($_POST["pw"]);
-    $fname = htmlentities($_POST["fname"]);
-    $middleName = htmlentities($_POST["mname"]);
-    $lastName = htmlentities($_POST["lname"]);
-    $nameExt = htmlentities($_POST["nameExt"]);
-    $role = htmlentities($_POST["role"]);
-    $img = uploadImage('accountPhoto');
+    $conn = new PDOModel();
+    $db = $conn->getDb();
 
-    if ($img !== false) {
-        $updateAcc = $accountModel->updateAccount($id, $uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
-        setSessionMessage($updateAcc, "Account Updated Successfully!", "Account Update Failed!!");
+    $id = $_POST['id'];
+    $fetch_acc = [];
+
+    try {
+        $stmt = $db->prepare("SELECT * FROM account WHERE id='$id'");
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $fetch_acc[$row['id']]=$row;
+        }
+        return ($stmt->rowCount() > 0) ? $fetch_acc :0;
+    } catch (PDOException $e) {
+        // Handle any errors
+        echo "Error: " . $e->getMessage();
+        return false;
     }
+
+    // $uname = htmlentities($_POST["uname"]);
+    // $pw = htmlentities($_POST["pw"]);
+    // $fname = htmlentities($_POST["fname"]);
+    // $middleName = htmlentities($_POST["mname"]);
+    // $lastName = htmlentities($_POST["lname"]);
+    // $nameExt = htmlentities($_POST["nameExt"]);
+    // $role = htmlentities($_POST["role"]);
+    // $img = uploadImage('accountPhoto');
+
+    // if ($img !== false) {
+    //     $updateAcc = $accountModel->updateAccount($id, $uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
+    //     setSessionMessage($updateAcc, "Account Updated Successfully!", "Account Update Failed!!");
+    // }
 }
 
 function handleDeleteAccount($accountModel) {
