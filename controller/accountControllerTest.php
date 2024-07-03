@@ -38,26 +38,29 @@ function handleAddAccount($accountModel) {
 
 }
 
-function handleSaveAccount($accountModel) {
-    $conn = new PDOModel();
-    $db = $conn->getDb();
+// function handleSaveAccount($accountModel) {
+//     $conn = new PDOModel();
+//     $db = $conn->getDb();
 
-    $id = $_POST['id'];
-    $fetch_acc = [];
+//     $id = $_POST['id'];
+//     $fetch_acc = [];
 
-    try {
-        $stmt = $db->prepare("SELECT * FROM account WHERE id='$id'");
-        $stmt->execute();
+//     try {
+//         $stmt = $db->prepare("SELECT * FROM account WHERE id='$id'");
+//         // $stmt->execute();
+//         if(mysqli_num_rows($stmt) > 0) {
+//             while($row = mysqli_fetch_array($stmt)){
+//                 array_push($fetch_acc, $row);
+//                 header('content-type: application/json');
+//                 echo json_encode($fetch_acc);
+//             }
+//         }
 
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $fetch_acc[$row['id']]=$row;
-        }
-        return ($stmt->rowCount() > 0) ? $fetch_acc :0;
-    } catch (PDOException $e) {
-        // Handle any errors
-        echo "Error: " . $e->getMessage();
-        return false;
-    }
+//     } catch (PDOException $e) {
+//         // Handle any errors
+//         echo "Error: " . $e->getMessage();
+//         return false;
+//     }
 
     // $uname = htmlentities($_POST["uname"]);
     // $pw = htmlentities($_POST["pw"]);
@@ -72,7 +75,34 @@ function handleSaveAccount($accountModel) {
     //     $updateAcc = $accountModel->updateAccount($id, $uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
     //     setSessionMessage($updateAcc, "Account Updated Successfully!", "Account Update Failed!!");
     // }
+// }
+function handleSaveAccount($accountModel) {
+    $conn = new PDOModel();
+    $db = $conn->getDb();
+
+    $id = $_POST['id'];
+    $fetch_acc = [];
+
+    try {
+        $stmt = $db->prepare("SELECT * FROM account WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            $fetch_acc = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            header('Content-Type: application/json');
+            echo json_encode($fetch_acc);
+        } else {
+            echo json_encode(["message" => "No account found with ID: $id"]);
+        }
+
+    } catch (PDOException $e) {
+        // Handle any errors
+        echo json_encode(["error" => "Error: " . $e->getMessage()]);
+        return false;
+    }
 }
+
 
 function handleDeleteAccount($accountModel) {
     $id = $_POST['id'];

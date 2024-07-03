@@ -184,17 +184,14 @@
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form id="editAccountForm" method="post" enctype="multipart/form-data">
+                        <form id="editAccountForm" method="post" action="" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editAccountModalLabel">Edit Account</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <?php
-                                
-                                ?>
-                                <!-- <input type="hidden" id="editId" name="id"> -->
+                                <input type="hidden" id="editId" name="id">
                                 <div class="mb-3">
                                     <label for="editUname" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="editUname" name="uname" required>
@@ -230,11 +227,11 @@
                                     <input type="file" class="form-control" id="editAccountPhoto" name="accountPhoto[]"
                                         accept="image/*">
                                 </div>
-                                <input type="hidden" name="type" value="save">
+                                <!-- <input type="hidden" name="type" value="save"> -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary" name="save">Save changes</button>
                             </div>
                         </form>
                     </div>
@@ -298,30 +295,9 @@ $(document).ready(function() {
         });
     });
 
-    // $('#editAccountForm').on('submit', function(e) {
-    //     e.preventDefault();
-    //     var formData = new FormData($('#editAccountForm')[0]);
-    //     formData.append("type", "save"); // Add the additional field
-    //     console.log(formData);
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/edit-account',
-    //         data: formData,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function(response) {
-    //             console.log(response);
-    //             alert('Updated successfully');
-    //             // location.reload(); //refresh page
-    //         },
-    //         error: function(error) {
-    //             console.log(error);
-    //             alert('Error submitting form');
-    //         }
-    //     });
-    // });
     $(document).on('click', '.edit-btn', function(e) {
         e.preventDefault();
+
         var selectedID = $(this).closest('tr').find('.accID').text();
         console.log(selectedID);
 
@@ -359,14 +335,12 @@ $(document).ready(function() {
                     console.log(response);
                     var res = JSON.parse(response);
                     if (res.success) {
-                        alert(
-                            'Account deleted successfully');
-                        location
-                            .reload(); // Reload the page to reflect changes
+                        alert('Account deleted successfully');
+                        // location.reload();
+                        row.remove();
                     } else {
                         alert('Failed to delete account: ' +
-                            res
-                            .message
+                            res.message
                         ); // Log the specific error message
                     }
                 },
