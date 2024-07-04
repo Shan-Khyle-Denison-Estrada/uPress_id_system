@@ -1,7 +1,7 @@
             <?php
             include_once("././model/transactionManageModel.php");
             $obj = new TransactionManageModel();
-            $getALL = $obj->getAll();
+            $get = $obj->getAll();
             ?>
 
             <main class="content px-3 py-2">
@@ -34,8 +34,8 @@
                                     </thead>
                                     <tbody class="table-group-divider" id="">
                                         <?php
-                                            if ($getALL) {
-                                                foreach ($getALL as $item) {
+                                            if ($get) {
+                                                foreach ($get as $item) {
                                          ?>
                                         <tr>
                                             <td class="clientID" style="width: 40px;"><?= $item['client_id'] ?></td>
