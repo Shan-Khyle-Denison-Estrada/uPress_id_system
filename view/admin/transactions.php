@@ -14,14 +14,14 @@
                         </div>
                         <div class="col-md-4 col-12 align-items-center d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#addAccountModal">
-                                <i class="fa-solid fa-circle-plus"></i> Account
+                                data-bs-target="#StudentModal">
+                                <i class="fa-solid fa-circle-plus"></i> Student
                             </button>
                         </div>
                         <div class="col-md-12 col-12 align-items-center py-4 px-0 text-center d-flex justify-content-center"
                             style="width: 100%;">
                             <div class="table-responsive">
-                                <table class="table caption-top table-striped table-hover" id="user"
+                                <table class="table caption-top table-striped table-hover" id="transactions"
                                     style="width: 100%;">
                                     <thead class="table-dark">
                                         <th scope="col">Client ID</th>
@@ -51,40 +51,32 @@
                                             <td>
                                                 <?php
                                                     if ($item['status'] == 0) {
-                                                        $item['status'] = 'active';
+                                                        $item['status'] = 'Pending';
                                                     } else if ($item['status'] == 1) {
-                                                        $item['status'] = 'inactive';
+                                                        $item['status'] = 'Completed';
                                                     }
                                                 ?>
                                                 <span
-                                                    class="badge text-bg-<?= $item['status'] == 'active' ? 'success' : 'danger' ?>">
-                                                    <?= $item['status'] == 'active' ? 'Active' : 'Inactive' ?>
+                                                    class="badge text-bg-<?= $item['status'] == 'Completed' ? 'success' : 'danger' ?>">
+                                                    <?= $item['status'] ?>
                                                 </span>
                                             </td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <button type="button"
-                                                            class="btn btn-info btn-cirlce btn-sm view-btn"
-                                                            data-bs-toggle="modal" data-bs-target="">
+                                                        <a href="#" title="View"
+                                                            class=" btn btn-info btn-cirlce btn-sm">
                                                             <i class="fa-solid fa-eye" style="padding: 0;"></i>
-                                                            <!-- view -->
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-success btn-cirlce btn-sm edit-btn"
-                                                            data-id="<?= $item['id']; ?>" data-bs-toggle="modal"
-                                                            data-bs-target="#editAccountModal">
+                                                        </a>
+                                                        <a href="#" title="Edit"
+                                                            class=" btn btn-success btn-cirlce btn-sm">
                                                             <i class="fa-solid fa-pen-to-square"
                                                                 style="padding: 0;"></i>
-                                                            <!-- edit -->
-                                                        </button>
-
-                                                        <button type="button"
-                                                            class="btn btn-danger btn-cirlce btn-sm delete-btn"
-                                                            data-id="<?= $item['id'] ?>">
+                                                        </a>
+                                                        <a href="#" title="Edit"
+                                                            class=" btn btn-danger btn-cirlce btn-sm">
                                                             <i class="fa-solid fa-trash" style="padding: 0;"></i>
-                                                            <!-- delete -->
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -108,17 +100,16 @@
             </main>
             <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
             <!-- Add Modal -->
-            <div class="modal fade" id="addAccountModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" id="StudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <?= include('message.php'); ?>
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Account</h1>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Student Form</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="" id="addAccount">
-                            <div class="modal-body">
+                        <form method="post" id="addStudent" enctype="multipart/form-data">
+                            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Username</label>
                                     <input type="text" name="uname" class="form-control" placeholder="admin" required>
@@ -162,7 +153,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="add" class="btn btn-primary">Add account</button>
+                                <button type="submit" name="add" id="add" class="btn btn-primary">Add Student</button>
                             </div>
                         </form>
                     </div>
@@ -229,16 +220,7 @@
 
             <script>
 $(document).ready(function() {
-    $('#addAccountModal .js-example-basic-single').select2({
-        placeholder: 'Select An Option',
-        dropdownParent: $('#addAccountModal')
-    });
-    // Initialize Select2 for Edit Account Modal
-    $('#editAccountModal .js-example-basic-single').select2({
-        placeholder: 'Select An Option',
-        dropdownParent: $('#editAccountModal')
-    });
-    var table = $('#user').DataTable({
+    var table = $('#transactions').DataTable({
         // dom: 'Bfrtip',
         layout: {
             topStart: {
@@ -248,9 +230,41 @@ $(document).ready(function() {
             }
         }
     });
+
+    // $('#addAccountModal .js-example-basic-single').select2({
+    //     placeholder: 'Select An Option',
+    //     dropdownParent: $('#addAccountModal')
+    // });
+    // // Initialize Select2 for Edit Account Modal
+    // $('#editAccountModal .js-example-basic-single').select2({
+    //     placeholder: 'Select An Option',
+    //     dropdownParent: $('#editAccountModal')
+    // });
+
+    $(document).on('submit', '#addStudent', function(e) {
+        e.preventDefault();
+        var formdata = new FormData(this);
+        formdata.append("type", "add");
+        console.log(formdata);
+
+        $.ajax({
+            method: 'post',
+            url: "transactionController.php",
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+
+            },
+            error: function(error) {
+                console.log(error);
+                alert('Error submitting form');
+            }
+        });
+    });
 });
             </script>
-            <script>
+            <!-- <script>
 $(document).ready(function() {
     $('#addAccount').on('submit', function(e) {
         e.preventDefault();
@@ -341,4 +355,4 @@ $(document).ready(function() {
         }
     });
 });
-            </script>
+            </script> -->
