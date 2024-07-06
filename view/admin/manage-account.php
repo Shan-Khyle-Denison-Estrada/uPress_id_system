@@ -30,8 +30,8 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
                                         <th scope="col">Photo</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Date Added</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </thead>
                                     <tbody class="table-group-divider" id="">
@@ -58,6 +58,7 @@
                                             <td><?= $item['role'] ?></td>
                                             <td><img src="uploads/account/<?= $item['accountPhoto'] ?>"
                                                     style="max-height: 60px; max-width: 60px;"></td>
+                                            <td style="width: 80px !important;"><?= $item['createdAt'] ?></td>
                                             <td>
                                                 <?php
                                                     if ($item['status'] == 0) {
@@ -71,7 +72,6 @@
                                                     <?= $item['status'] == 'active' ? 'Active' : 'Inactive' ?>
                                                 </span>
                                             </td>
-                                            <td style="width: 80px !important;"><?= $item['createdAt'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
@@ -287,6 +287,8 @@ $(document).ready(function() {
                 $("#accountPhoto").val("");
 
                 $('#addAccountModal').modal('hide');
+                location.reload();
+
             },
             error: function(error) {
                 console.log(error);

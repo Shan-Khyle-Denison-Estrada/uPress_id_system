@@ -110,50 +110,70 @@
                         </div>
                         <form method="post" id="addStudent" enctype="multipart/form-data">
                             <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Username</label>
-                                    <input type="text" name="uname" class="form-control" placeholder="admin" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Password</label>
-                                    <input type="password" name="pw" class="form-control" placeholder="********"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">First name</label>
-                                    <input type="text" name="fname" class="form-control" placeholder="" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Middle name</label>
-                                    <input type="text" name="mname" class="form-control" placeholder="">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Last name</label>
-                                    <input type="text" name="lname" class="form-control" placeholder="" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Name Ext.</label>
-                                    <input type="text" name="nameExt" class="form-control" placeholder="Sr / Jr">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Role</label>
-                                    <select class="form-control js-example-basic-single" name="role" id="role" required
-                                        style="width: 100%;">
-                                        <option value="">Select Role</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="super_admin">Super Admin</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Insert your photo</label>
-                                    <input class="form-control" type="file" name="accountPhoto[]" id="accountPhoto"
-                                        accept="image/*">
+                                <div class="container-fluid">
+                                    <h3>Student Info</h3>
+                                    <p>Enter your basic information correctly</p>
+                                    <!-- Radio Buttons -->
+                                    <div
+                                        class="container-fluid d-flex flex-row justify-content-center align-content-center m-0 py-2 gap-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="formType" value="New"
+                                                id="new" checked onclick="text(0)">
+                                            <label class="form-check-label ps-2" for="new">New</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="formType"
+                                                value="Replacement" id="rep" onclick="text(1)">
+                                            <label class="form-check-label ps-2" for="rep">Replacement</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="formType" value="Lost"
+                                                id="lost" onclick="text(2)">
+                                            <label class="form-check-label ps-2" for="lost">Lost</label>
+                                        </div>
+                                    </div>
+                                    <!-- Radio Buttons End -->
+                                    <div>
+                                        <label for="">Student Number</label>
+                                        <input type="text" name="studnum" id="studId" placeholder="e.g. 2021-00398"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="">WMSU Email</label>
+                                        <input type="text" name="wmsuEmail" id="wmsuEmail"
+                                            placeholder="e.g. qb202100398@wmsu.edu.ph" required>
+                                    </div>
+                                    <div>
+                                        <label for="">First Name</label>
+                                        <input type="text" name="firstName" id="fname" placeholder="e.g. Angelo John"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="">Middle Name</label>
+                                        <input type="text" name="middleName" id="mname" placeholder="e.g. Sinsuan">
+                                    </div>
+                                    <div>
+                                        <label for="">Family Name</label>
+                                        <input type="text" name="familyName" id="famname" placeholder="e.g. Landiao"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="">Name Ext.</label>
+                                        <input type="text" name="nameExt" id="ext" placeholder="e.g. Sr./Jr.">
+                                    </div>
+                                    <div>
+                                        <label for="">Program/Strand</label>
+                                        <select class="js-example-theme-single" name="programs" id="select-program">
+                                            <option value="">Select a program</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="add" id="add" class="btn btn-primary">Add Student</button>
+                                <button type="submit" name="addStud" id="add" class="btn btn-primary">Add
+                                    Student</button>
                             </div>
                         </form>
                     </div>
@@ -244,7 +264,7 @@ $(document).ready(function() {
     $(document).on('submit', '#addStudent', function(e) {
         e.preventDefault();
         var formdata = new FormData(this);
-        formdata.append("type", "add");
+        formdata.append("type", "addStud");
         console.log(formdata);
 
         $.ajax({
@@ -254,7 +274,26 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {
-
+                alert('Form submitted successfully');
+                $("#studId").val("");
+                $("#wmsuEmail").val("");
+                $("#fname").val("");
+                $("#mname").val("");
+                $("#famname").val("");
+                $("#ext").val("");
+                $("#select-program").val("");
+                $("#fnameEmg").val("");
+                $("#mnameEmg").val("");
+                $("#famnameEmg").val("");
+                $("#extEmg").val("");
+                $("#addEmg").val("");
+                $("#contactEmg").val("");
+                $("#userPhoto").val("");
+                $("#signature").val("");
+                $("#cor").val("");
+                $("#frontId").val("");
+                $("#backId").val("");
+                $("#affidavit").val("");
             },
             error: function(error) {
                 console.log(error);

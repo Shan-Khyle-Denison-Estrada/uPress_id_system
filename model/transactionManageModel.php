@@ -21,6 +21,7 @@ class TransactionManageModel{
                 FROM clients
                 LEFT JOIN student ON clients.id = student.clientIDStudent
                 LEFT JOIN employee ON clients.id = employee.clientIDEmp
+                WHERE deletedAt IS NULL
             ");
             $stmt->execute();
             $fetch_acc = [];
