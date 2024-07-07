@@ -37,9 +37,9 @@ function handleAddStud($objModel){
             $program, $emgfname, $emgMname, $emgLname, $emgNameExt, $emgAddress, $emgContact, $photo, $signature, $cor, $oldId, $oldIdBack, $aol
     );
     if ($newClient) {
-        setSessionMessage(true, "Account Created Successfully!", "Account Creation Failed!!");
+        echo json_encode(['message'=>'Successfully added '.$firstname.' '.$familyname,'status'=>'success']);
     } else {
-        setSessionMessage(false, "Account Created Successfully!", "Account Creation Failed!!");
+        echo json_encode(['message'=>'Failed to add'.$firstname.' '.$familyname,'status'=>'error']);
     }
 
 }

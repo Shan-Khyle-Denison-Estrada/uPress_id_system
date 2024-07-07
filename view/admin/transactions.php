@@ -105,14 +105,13 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Student Form</h1>
+                            <h1 class="modal-title fs-2" id="staticBackdropLabel">Student Info</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post" id="addStudent" enctype="multipart/form-data">
                             <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                                <div class="container-fluid">
-                                    <h3>Student Info</h3>
-                                    <p>Enter your basic information correctly</p>
+                                <div class="row container-fluid">
+                                    <h6>Enter your basic information correctly</h6>
                                     <!-- Radio Buttons -->
                                     <div
                                         class="container-fluid d-flex flex-row justify-content-center align-content-center m-0 py-2 gap-2">
@@ -245,7 +244,7 @@ $(document).ready(function() {
         layout: {
             topStart: {
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    'copy', 'csv', 'pdf'
                 ]
             }
         }

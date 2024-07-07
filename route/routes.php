@@ -10,9 +10,10 @@ $_SESSION["navTitle"] = $segments[0];
 if(isset($_SESSION["isLogin"]) == 1){
     if($_SESSION["role"] == "super_admin"){
         $acctype = "Super Admin";
-        include_once("view/admin/dash-header.php");
-        include_once("view/admin/dash-sidenav-bar.php");
-        
+        if(isset($_POST['ignoreHeaderFooter']) != 1){
+            include_once("view/admin/dash-header.php");
+            include_once("view/admin/dash-sidenav-bar.php");
+        }
         switch($segments[0]){
             case "dashboard":
                 require_once("view/admin/dashboard.php");
@@ -55,7 +56,9 @@ if(isset($_SESSION["isLogin"]) == 1){
                 break;
             
         }
-        include_once("view/admin/dash-footer.php");
+        if(isset($_POST["ignoreHeaderFooter"]) != 1){
+            include_once("view/admin/dash-footer.php");
+        }
     } else {
         if($_SESSION["role"] == "admin"){
             $acctype = "Admin";
