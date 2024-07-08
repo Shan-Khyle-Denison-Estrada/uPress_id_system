@@ -30,8 +30,8 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
                                         <th scope="col">Photo</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Date Added</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </thead>
                                     <tbody class="table-group-divider" id="">
@@ -58,6 +58,7 @@
                                             <td><?= $item['role'] ?></td>
                                             <td><img src="uploads/account/<?= $item['accountPhoto'] ?>"
                                                     style="max-height: 60px; max-width: 60px;"></td>
+                                            <td style="width: 80px !important;"><?= $item['createdAt'] ?></td>
                                             <td>
                                                 <?php
                                                     if ($item['status'] == 0) {
@@ -71,25 +72,17 @@
                                                     <?= $item['status'] == 'active' ? 'Active' : 'Inactive' ?>
                                                 </span>
                                             </td>
-                                            <td style="width: 80px !important;"><?= $item['createdAt'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
                                                         <button type="button"
-                                                            class="btn btn-info btn-cirlce btn-sm view-btn"
-                                                            data-bs-toggle="modal" data-bs-target="">
-                                                            <i class="fa-solid fa-eye" style="padding: 0;"></i>
-                                                            <!-- view -->
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-success btn-cirlce btn-sm edit-btn"
+                                                            class="btn btn-success btn-cirlce btn-sm edit-btn "
                                                             data-id="<?= $item['id']; ?>" data-bs-toggle="modal"
                                                             data-bs-target="#editAccountModal">
                                                             <i class="fa-solid fa-pen-to-square"
                                                                 style="padding: 0;"></i>
                                                             <!-- edit -->
                                                         </button>
-
                                                         <button type="button"
                                                             class="btn btn-danger btn-cirlce btn-sm delete-btn"
                                                             data-id="<?= $item['id'] ?>">
@@ -124,7 +117,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <?= include('message.php'); ?>
+                            <!-- ?= include('message.php'); ?> -->
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Account</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -184,18 +177,15 @@
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form id="editAccountForm" method="post" enctype="multipart/form-data">
+                        <form id="editAccountForm" method="post" action="" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editAccountModalLabel">Edit Account</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <?php
-                                
-                                ?>
-                                <!-- <input type="hidden" id="editId" name="id"> -->
                                 <div class="mb-3">
+                                    <input type="hidden" id="editId" name="accId">
                                     <label for="editUname" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="editUname" name="uname" required>
                                 </div>
@@ -230,11 +220,11 @@
                                     <input type="file" class="form-control" id="editAccountPhoto" name="accountPhoto[]"
                                         accept="image/*">
                                 </div>
-                                <input type="hidden" name="type" value="save">
+                                <!-- <input type="hidden" name="type" value="save"> -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary" name="save">Save changes</button>
                             </div>
                         </form>
                     </div>
@@ -257,7 +247,7 @@ $(document).ready(function() {
         layout: {
             topStart: {
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    'copy', 'csv', 'pdf'
                 ]
             }
         }
@@ -270,7 +260,9 @@ $(document).ready(function() {
         e.preventDefault();
         var formData = new FormData(this);
         formData.append("type", "add"); // Add the additional field
+        formData.append("ignoreHeaderFooter", 1);
         console.log(formData);
+
         $.ajax({
             type: 'POST',
             url: '/add-account',
@@ -278,56 +270,75 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(response) {
-                // console.log(response);
-                alert('Account Created Successfully');
-                $("#uname").val("");
-                $("#pw").val("");
-                $("#fname").val("");
-                $("#mname").val("");
-                $("#lname").val("");
-                $("#nameExt").val("");
-                $("#role").val("");
-                $("#accountPhoto").val("");
-
-                $('#addAccountModal').modal('hide');
+                var res = response;
+                if (res.status === 'success') {
+                    alert(res.message);
+                    location.reload();
+                } else {
+                    alert(res.message);
+                }
+                /*try {
+                    var res = JSON.parse(response);
+                    if (res.status === 'success') {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                    $("#uname").val("");
+                    $("#pw").val("");
+                    $("#fname").val("");
+                    $("#mname").val("");
+                    $("#lname").val("");
+                    $("#nameExt").val("");
+                    $("#role").val("");
+                    $("#accountPhoto").val("");
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                    console.error('Response received:', response);
+                    alert('Error parsing server response');
+                }*/
             },
             error: function(error) {
-                console.log(error);
+                console.log('Error:', error);
                 alert('Error submitting form');
             }
         });
     });
 
-    // $('#editAccountForm').on('submit', function(e) {
-    //     e.preventDefault();
-    //     var formData = new FormData($('#editAccountForm')[0]);
-    //     formData.append("type", "save"); // Add the additional field
-    //     console.log(formData);
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/edit-account',
-    //         data: formData,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function(response) {
-    //             console.log(response);
-    //             alert('Updated successfully');
-    //             // location.reload(); //refresh page
-    //         },
-    //         error: function(error) {
-    //             console.log(error);
-    //             alert('Error submitting form');
-    //         }
-    //     });
-    // });
+
+    $("#editAccountForm").on("submit", function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        formData.append("type", "updateUser");
+        formData.append("ignoreHeaderFooter", 1);
+        $.ajax({
+            type: 'POST',
+            url: "/edit-account",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                var res = JSON.parse(response);
+                if (res.status == 'success') {
+                    alert(res.message);
+                    location.reload();
+                }
+                console.log(response);
+            }
+        })
+    });
+
     $(document).on('click', '.edit-btn', function(e) {
         e.preventDefault();
         var selectedID = $(this).closest('tr').find('.accID').text();
+
         console.log(selectedID);
 
         var formData = new FormData();
-        formData.append("type", "save");
+        formData.append("type", "viewUser");
         formData.append('accId', selectedID);
+        formData.append("ignoreHeaderFooter", 1);
 
         $.ajax({
             type: 'POST',
@@ -336,7 +347,16 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(response) {
-                console.log(response);
+                var res = JSON.parse(response);
+                console.log(res);
+                $("#editUname").val(res.username);
+                $("#editPw").val(res.password);
+                $("#editFname").val(res.firstName);
+                $("#editMname").val(res.middleName);
+                $("#editLname").val(res.lastName);
+                $("#editNameExt").val(res.nameExt);
+                $("#editRole").val(res.role);
+                $("#editId").val(res.id);
             }
         });
     });
@@ -359,15 +379,11 @@ $(document).ready(function() {
                     console.log(response);
                     var res = JSON.parse(response);
                     if (res.success) {
-                        alert(
-                            'Account deleted successfully');
-                        location
-                            .reload(); // Reload the page to reflect changes
+                        alert(res.message);
+                        row.remove();
+                        location.reload();
                     } else {
-                        alert('Failed to delete account: ' +
-                            res
-                            .message
-                        ); // Log the specific error message
+                        alert(res.message);
                     }
                 },
                 error: function() {
@@ -376,6 +392,8 @@ $(document).ready(function() {
                 }
             });
         }
+
+
     });
 });
             </script>

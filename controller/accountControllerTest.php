@@ -7,8 +7,11 @@ if (isset($_POST["type"])) {
         case 'add':
             handleAddAccount($newAcc);
             break;
-        case 'save':
-            handleSaveAccount($newAcc);
+        case 'viewUser':
+            handleViewAccount($newAcc);
+            break;
+        case 'updateUser':
+            handleUpdateAccount($newAcc);
             break;
         case 'delete':
             handleDeleteAccount($newAcc);
@@ -16,8 +19,7 @@ if (isset($_POST["type"])) {
     }
 }
 
-function handleAddAccount($accountModel) {
-    var_dump('est');
+function handleUpdateAccount($accountModel){
     $uname = htmlentities($_POST["uname"]);
     $pw = htmlentities($_POST["pw"]);
     $fname = htmlentities($_POST["fname"]);
@@ -26,62 +28,58 @@ function handleAddAccount($accountModel) {
     $nameExt = htmlentities($_POST["nameExt"]);
     $role = htmlentities($_POST["role"]);
     $img = uploadImage('accountPhoto');
-
-    $addAcc = $accountModel->addAccount($uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
-
-    if ($addAcc) {
-        setSessionMessage(true, "Account Created Successfully!", "Account Creation Failed!!");
+    $id = $_POST["accId"];
+    
+    $updateAcc = $accountModel->updateAccount($id,$uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);  
+    
+    if ($updateAcc) {
+        echo json_encode(['message'=>'succesfully updated the user '.$uname,'status'=>'success']);
     } else {
-        setSessionMessage(false, "Account Created Successfully!", "Account Creation Failed!!");
+        echo json_encode(['message'=>'failed to update user '.$uname,'status'=>'error']);
     }
     
-
 }
 
-function handleSaveAccount($accountModel) {
-    $conn = new PDOModel();
-    $db = $conn->getDb();
+function handleViewAccount($accountModel){
+    $id = $_POST["accId"];
+    $result = $accountModel->getAccountById($id);
+    if($result){
+        echo json_encode($result);
+    }
+}
 
-    $id = $_POST['id'];
-    $fetch_acc = [];
+function handleAddAccount($accountModel) {
+    header('Content-Type: application/json');
+    // For debugging
+    error_log('Inside handleAddAccount function');
 
     try {
-        $stmt = $db->prepare("SELECT * FROM account WHERE id='$id'");
-        $stmt->execute();
+        $uname = htmlentities($_POST["uname"]);
+        $pw = htmlentities($_POST["pw"]);
+        $fname = htmlentities($_POST["fname"]);
+        $middleName = htmlentities($_POST["mname"]);
+        $lastName = htmlentities($_POST["lname"]);
+        $nameExt = htmlentities($_POST["nameExt"]);
+        $role = htmlentities($_POST["role"]);
+        $img = uploadImage('accountPhoto');
 
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $fetch_acc[$row['id']]=$row;
+        $addAcc = $accountModel->addAccount($uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
+
+        if ($addAcc) {
+            echo json_encode(['message' => 'Successfully Created the user ' . $uname, 'status' => 'success']);
+        } else {
+            echo json_encode(['message' => 'Failed to create the user ' . $uname, 'status' => 'error']);
         }
-        return ($stmt->rowCount() > 0) ? $fetch_acc :0;
-    } catch (PDOException $e) {
-        // Handle any errors
-        echo "Error: " . $e->getMessage();
-        return false;
+    } catch (Exception $e) {
+        echo json_encode(['message' => 'Server error: ' . $e->getMessage(), 'status' => 'error']);
     }
-
-    // $uname = htmlentities($_POST["uname"]);
-    // $pw = htmlentities($_POST["pw"]);
-    // $fname = htmlentities($_POST["fname"]);
-    // $middleName = htmlentities($_POST["mname"]);
-    // $lastName = htmlentities($_POST["lname"]);
-    // $nameExt = htmlentities($_POST["nameExt"]);
-    // $role = htmlentities($_POST["role"]);
-    // $img = uploadImage('accountPhoto');
-
-    // if ($img !== false) {
-    //     $updateAcc = $accountModel->updateAccount($id, $uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
-    //     setSessionMessage($updateAcc, "Account Updated Successfully!", "Account Update Failed!!");
-    // }
 }
+
 
 function handleDeleteAccount($accountModel) {
     $id = $_POST['id'];
     $deleteAcc = $accountModel->softDeleteAccount($id);
-    setSessionMessage($deleteAcc, "Account Deleted Successfully!", "Account Deletion Failed!!");
-}
-
-function setSessionMessage($success, $successMessage, $failureMessage) {
-    $_SESSION['message'] = $success ? $successMessage : $failureMessage;
+    echo json_encode(['message'=>'Successfully deleted the user'.$id,'status'=>'success']);
 }
 
 function uploadImage($fieldName) {
@@ -115,7 +113,7 @@ function uploadImage($fieldName) {
     }
 
     if (!empty($errors)) {
-        echo json_encode($errors);
+        
         return false;
     }
 
