@@ -55,7 +55,16 @@
                                                 substr($item['firstName']." ".$item['middleName']." ".$item['lastName']." ".$item['nameExt'], 0, 15) . '...' :
                                                 $item['firstName']." ".$item['middleName']." ".$item['lastName']." ".$item['nameExt'] ?>
                                             </td>
-                                            <td><?= $item['role'] ?></td>
+                                            <td>
+                                                <?php
+                                                if ($item['role'] == 'admin') {
+                                                    $item['role'] = "Admin";
+                                                } else if ($item['role'] == 'operator'){
+                                                    $item['role'] = "Operator";
+                                                }
+                                                ?>
+                                                <?= $item['role'] ?>
+                                            </td>
                                             <td><img src="uploads/account/<?= $item['accountPhoto'] ?>"
                                                     style="max-height: 60px; max-width: 60px;"></td>
                                             <td style="width: 80px !important;"><?= $item['createdAt'] ?></td>
@@ -85,7 +94,7 @@
                                                         </button>
                                                         <button type="button"
                                                             class="btn btn-danger btn-cirlce btn-sm delete-btn"
-                                                            data-id="<?= $item['id'] ?>">
+                                                            data-id="<?= $item['id']; ?>">
                                                             <i class="fa-solid fa-trash" style="padding: 0;"></i>
                                                             <!-- delete -->
                                                         </button>
@@ -117,7 +126,6 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <!-- ?= include('message.php'); ?> -->
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Account</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -154,7 +162,7 @@
                                         style="width: 100%;">
                                         <option value="">Select Role</option>
                                         <option value="admin">Admin</option>
-                                        <option value="super_admin">Super Admin</option>
+                                        <option value="operator">Operator</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -212,7 +220,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="editRole" class="form-label">Role</label>
-                                    <input type="text" class="form-control" id="editRole" name="role" required>
+                                    <select class="form-control js-example-basic-single" name="role" id="role" required
+                                        style="width: 100%;">
+                                        <option value="">Select Role</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="operator">Operator</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="editAccountPhoto" class="form-label">Account
@@ -237,7 +250,7 @@ $(document).ready(function() {
         placeholder: 'Select An Option',
         dropdownParent: $('#addAccountModal')
     });
-    // Initialize Select2 for Edit Account Modal
+    // Initialize Select2 for Edit Account Modald
     $('#editAccountModal .js-example-basic-single').select2({
         placeholder: 'Select An Option',
         dropdownParent: $('#editAccountModal')
@@ -277,27 +290,14 @@ $(document).ready(function() {
                 } else {
                     alert(res.message);
                 }
-                /*try {
-                    var res = JSON.parse(response);
-                    if (res.status === 'success') {
-                        alert(res.message);
-                        location.reload();
-                    } else {
-                        alert(res.message);
-                    }
-                    $("#uname").val("");
-                    $("#pw").val("");
-                    $("#fname").val("");
-                    $("#mname").val("");
-                    $("#lname").val("");
-                    $("#nameExt").val("");
-                    $("#role").val("");
-                    $("#accountPhoto").val("");
-                } catch (e) {
-                    console.error('Error parsing JSON:', e);
-                    console.error('Response received:', response);
-                    alert('Error parsing server response');
-                }*/
+                $("#uname").val("");
+                $("#pw").val("");
+                $("#fname").val("");
+                $("#mname").val("");
+                $("#lname").val("");
+                $("#nameExt").val("");
+                $("#role").val("");
+                $("#accountPhoto").val("");
             },
             error: function(error) {
                 console.log('Error:', error);
@@ -305,7 +305,6 @@ $(document).ready(function() {
             }
         });
     });
-
 
     $("#editAccountForm").on("submit", function(e) {
         e.preventDefault();
@@ -377,14 +376,14 @@ $(document).ready(function() {
                 contentType: false,
                 success: function(response) {
                     console.log(response);
-                    var res = JSON.parse(response);
+                    var res = response;
                     if (res.success) {
                         alert(res.message);
                         row.remove();
-                        location.reload();
                     } else {
                         alert(res.message);
                     }
+                    location.reload();
                 },
                 error: function() {
                     alert(
@@ -392,8 +391,6 @@ $(document).ready(function() {
                 }
             });
         }
-
-
     });
 });
             </script>

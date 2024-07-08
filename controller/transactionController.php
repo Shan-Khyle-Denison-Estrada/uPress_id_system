@@ -1,15 +1,31 @@
 <?php
 include_once("model/studModel.php");
 include_once("model/empModel.php");
-$client = new StudentModel();
-$client1 = new EmployeeModel();  
+include_once("model/transactionManageModel.php");
+$Stud = new StudentModel();
+$Employ = new EmployeeModel();
+$clients = new TransactionManageModel();
+// $clients = $obj->getAll();
+// $delClient = $obj->softDeleteClient($id);
 
-if(isset($_POST["type"]) == "addStud"){
-    handleAddStud($client);
+if(isset($_POST["type"])){
+    if($_POST["type"] == "student"){
+        switch($_POST["type2"]) {
+            case 'addStud':
+                handleAddStud($Stud);
+                break;
+            case 'viewClients':
+                handleViewClients($clients);
+                break;
+            case 'delete':
+                handleDeleteClient($clients);
+                break;
+            
+        }
+    }
 }
-
 function handleAddStud($objModel){
-    var_dump($objModel);
+    // var_dump($objModel);
     $type = $_POST["type"];
     $formtype = $_POST["formType"];
     $studId = $_POST["studnum"];
@@ -32,11 +48,11 @@ function handleAddStud($objModel){
     $oldIdBack = uploadImage('oldIdBack');
     $aol = uploadImage('aol');
 
-    $newClient = $objModel->requestId(
+    $res1 = $objModel->requestId(
         $type, $formtype, $studId, $wmsuEmail, $firstname, $middlename, $familyname, $nameExt,
             $program, $emgfname, $emgMname, $emgLname, $emgNameExt, $emgAddress, $emgContact, $photo, $signature, $cor, $oldId, $oldIdBack, $aol
     );
-    if ($newClient) {
+    if ($res1) {
         echo json_encode(['message'=>'Successfully added '.$firstname.' '.$familyname,'status'=>'success']);
     } else {
         echo json_encode(['message'=>'Failed to add'.$firstname.' '.$familyname,'status'=>'error']);
@@ -44,7 +60,23 @@ function handleAddStud($objModel){
 
 }
 
+function handleViewClients($objModel){
+    $id = $_POST("client_id");
+    $result = $objModel->getAll($id);
+    if($result){
+        echo json_encode($result);
+    }
+}
 
+function handleDeleteClient($objModel) {
+    $id = $_POST['client_id'];
+    $deleteAcc = $objModel->softDeleteClient($id);
+    if($deleteAcc){
+        echo json_encode(['message'=>'Successfully deleted client '.$id,'status'=>'success']);
+    } else {
+        echo json_encode(['message'=>'Failed to delete client'.$id,'status'=>'error']);
+    }
+}
 
 function uploadImage($fieldName) {
     $errors = array();

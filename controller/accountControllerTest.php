@@ -66,9 +66,9 @@ function handleAddAccount($accountModel) {
         $addAcc = $accountModel->addAccount($uname, $pw, $fname, $middleName, $lastName, $nameExt, $role, $img);
 
         if ($addAcc) {
-            echo json_encode(['message' => 'Successfully Created the user ' . $uname, 'status' => 'success']);
+            echo json_encode(['message' => 'Successfully created user ' .$uname. 'as ' .$role, 'status' => 'success']);
         } else {
-            echo json_encode(['message' => 'Failed to create the user ' . $uname, 'status' => 'error']);
+            echo json_encode(['message' => 'Failed to create the user ' .$uname. 'as ' .$role, 'status' => 'error']);
         }
     } catch (Exception $e) {
         echo json_encode(['message' => 'Server error: ' . $e->getMessage(), 'status' => 'error']);
@@ -79,7 +79,11 @@ function handleAddAccount($accountModel) {
 function handleDeleteAccount($accountModel) {
     $id = $_POST['id'];
     $deleteAcc = $accountModel->softDeleteAccount($id);
-    echo json_encode(['message'=>'Successfully deleted the user'.$id,'status'=>'success']);
+    if($deleteAcc){
+        echo json_encode(['message'=>'Successfully deleted the user'.$id,'status'=>'success']);
+    } else {
+        echo json_encode(['message'=>'Failed to delete user'.$id,'status'=>'error']);
+    }
 }
 
 function uploadImage($fieldName) {

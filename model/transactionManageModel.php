@@ -21,7 +21,7 @@ class TransactionManageModel{
                 FROM clients
                 LEFT JOIN student ON clients.id = student.clientIDStudent
                 LEFT JOIN employee ON clients.id = employee.clientIDEmp
-                WHERE deletedAt IS NULL
+                WHERE clients.deletedAt IS NULL
             ");
             $stmt->execute();
             $fetch_acc = [];
@@ -34,6 +34,24 @@ class TransactionManageModel{
             echo "Error: " . $e->getMessage();
             return false;
         }
+    }
+    function softDeleteClient($id) {
+        $conn = new PDOModel();
+        $db = $conn->getDb();
+        
+        $stmt = $db->prepare("UPDATE clients SET deletedAt = NOW() WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    function reactivateClient($id) {
+        $conn = new PDOModel();
+        $db = $conn->getDb();
+
+        // Reactivate the account by setting deleted_at to NULL
+        $stmt = $db->prepare("UPDATE clients SET deletedAt = NULL WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
     }
 }
 ?>

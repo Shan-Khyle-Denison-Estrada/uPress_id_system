@@ -44,7 +44,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <form id="studentForm" action="post">
+                            <form id="studentForm" method="post" enctype="multipart/form-data">
                                 <div class="form-one form-step active">
                                     <h3>Student Info</h3>
                                     <p>Enter your basic information correctly</p>
