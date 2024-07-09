@@ -41,21 +41,23 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="manage-accounts" class="sidebar-link">
-                            <i class="fa-solid fa-user-tie"></i>
-                            Account Management
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
                         <a href="settings" class="sidebar-link">
                             <i class="fa-solid fa-sliders"></i>
                             ID Settings
                         </a>
                     </li>
-                    <a href="my-profile" class="sidebar-link">
-                        <i class="fa-solid fa-user-tie"></i>
-                        <?= $acctype; ?> Profile
-                    </a>
+                    <li class="sidebar-item">
+                        <a href="manage-accounts" class="sidebar-link">
+                            <i class="fa-solid fa-user-tie"></i>
+                            Account Management
+                        </a>
+                    </li>
+                    <li class="sidebar-item mb-3">
+                        <a href="my-profile" class="sidebar-link">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <?= $acctype; ?> Profile
+                        </a>
+                    </li>
                     <li class="sidebar-item">
                         <a href="logout" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -80,14 +82,14 @@
                 <div class="navbar-collapse navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a href="" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <?php echo $acctype." ".$_SESSION["firstName"]; ?>
-                                <img src="../../assets/logo/upress-logo-red.svg" class="avatar img-fluid rounded"
-                                    alt="">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                Welcome, <?= $_SESSION['role']; ?>
+                                <img src="../../uploads/account/<?=$_SESSION['accountPhoto'];?>"
+                                    class="avatar img-fluid rounded-circle" alt="photo">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="my-profile" class="dropdown-item">
-                                    <?php echo $acctype; ?> Profile
+                                    <?= $acctype; ?> Profile
                                 </a>
                                 <a href="logout" class="dropdown-item">Logout</a>
                             </div>
