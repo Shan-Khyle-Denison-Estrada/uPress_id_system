@@ -3,7 +3,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="single-box">
-                        <img src="../assets/logo/upress-logo-red.svg" class="img-fluid" alt="UPress Logo in Red">
+                        <img src="assets/logo/upress-logo-red.svg" class="img-fluid" alt="UPress Logo in Red">
                         <p id="text-content">UNIVERSITY PRESS<br>
                             Western Mindanao State University<br>
                             Normal Rd.,Baliwasan, Zamboanga City<br>

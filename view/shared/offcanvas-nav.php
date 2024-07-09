@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="../../assets/logo/wmsu-logo.svg" id="nav-logo" alt="WMSU Logo"></a>
-            <a class="navbar-brand" href="/">CrimsonIDentify</a>
+            <a class="navbar-brand" href="/"><img src="assets/logo/wmsu-logo.svg" id="nav-logo" alt="WMSU Logo"></a>
+            <a class="navbar-brand" href="/">Crimson IDentify</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
                 <div class="offcanvas-header">
-                    <a class="navbar-brand" href="#"><img src="../../assets/logo/wmsu-logo.svg" id="nav-logo" alt="WMSU Logo"></a>
-                    <a class="navbar-brand" href="#">CrimsonIDentify</a>
+                    <a class="navbar-brand" href="#"><img src="assets/logo/wmsu-logo.svg" id="nav-logo" alt="WMSU Logo"></a>
+                    <a class="navbar-brand" href="#">Crimson IDentify</a>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
